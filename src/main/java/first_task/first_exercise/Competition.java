@@ -1,4 +1,4 @@
-package first_task;
+package first_task.first_exercise;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;

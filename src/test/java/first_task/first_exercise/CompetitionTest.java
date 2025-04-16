@@ -1,4 +1,4 @@
-package first_task;
+package first_task.first_exercise;
 
 import org.junit.jupiter.api.Test;
 import java.util.List;

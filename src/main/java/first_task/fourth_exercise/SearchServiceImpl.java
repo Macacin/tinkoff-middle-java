@@ -25,9 +25,7 @@ public class SearchServiceImpl implements SearchService {
 
         visited.add(me.getId());
         for (User f : initialFriends) {
-            if (f != null) {
-                queue.offer(f);
-            }
+            queue.offer(f);
         }
 
         while (!queue.isEmpty()) {
@@ -42,7 +40,7 @@ public class SearchServiceImpl implements SearchService {
 
             List<User> friends = currUser.getFriends();
             for (User friend : friends) {
-                if (friend != null && !visited.contains(friend.getId())) {
+                if (!visited.contains(friend.getId())) {
                     queue.offer(friend);
                 }
             }
@@ -65,9 +63,7 @@ public class SearchServiceImpl implements SearchService {
 
         visited.add(me.getId());
         for (User f : initialFriends) {
-            if (f != null) {
-                stack.push(f);
-            }
+            stack.push(f);
         }
 
         while (!stack.isEmpty()) {
@@ -82,7 +78,7 @@ public class SearchServiceImpl implements SearchService {
 
             List<User> friends = current.getFriends();
             for (User friend : friends) {
-                if (friend != null && !visited.contains(friend.getId())) {
+                if (!visited.contains(friend.getId())) {
                     stack.push(friend);
                 }
             }

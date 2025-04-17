@@ -12,7 +12,26 @@ public class AccountThread implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < 4000; i++) {
-            // implement
+            while (true) {
+                boolean from = accountFrom.getLock().tryLock();
+                boolean to = accountTo.getLock().tryLock();
+
+                if (from && to) {
+                    if (accountFrom.takeOffMoney(money)) {
+                        accountTo.addMoney(money);
+                        accountFrom.getLock().unlock();
+                        accountTo.getLock().unlock();
+                        break;
+                    }
+                }
+
+                if (from) {
+                    accountFrom.getLock().unlock();
+                }
+                if (to) {
+                    accountTo.getLock().unlock();
+                }
+            }
         }
     }
 }

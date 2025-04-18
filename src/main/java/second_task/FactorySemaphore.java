@@ -8,7 +8,7 @@ public class FactorySemaphore {
 
     private static final int MACHINES = 5;
     private static final int WORKERS = 8;
-    private static final Worker machine = new Worker();
+    private static final Worker worker = new Worker();
 
     public static void main(String[] args) throws InterruptedException {
         Semaphore machines = new Semaphore(MACHINES);
@@ -19,7 +19,7 @@ public class FactorySemaphore {
             Thread thread = new Thread(() -> {
                 try {
                     machines.acquire();
-                    machine.work(finalI);
+                    worker.work(finalI);
                     machines.release();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

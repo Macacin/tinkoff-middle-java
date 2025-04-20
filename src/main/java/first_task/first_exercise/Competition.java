@@ -13,7 +13,7 @@ public class Competition {
         Map<String, Integer> playerScores = new HashMap<>();
 
         int maxScore = Integer.MIN_VALUE;
-        String currentWinner = null;
+        String winner = null;
         int step = 0;
         int winnerStep = 0;
 
@@ -25,17 +25,17 @@ public class Competition {
 
             if (current > maxScore) {
                 maxScore = current;
-                currentWinner = name;
+                winner = name;
                 winnerStep = step;
             } else if (current == maxScore && step < winnerStep) {
-                currentWinner = name;
+                winner = name;
                 winnerStep = step;
             }
 
             step++;
         }
 
-        return currentWinner;
+        return winner;
     }
 
     private static String parseName(String competitor) {

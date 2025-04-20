@@ -12,7 +12,7 @@ public class FactoryThreadPool {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(MACHINES);
 
-        for (int i = 1; i <= WORKERS; i++) {
+        for (int i = 0; i <= WORKERS; i++) {
             int finalI = i;
             executor.submit(() -> worker.work(finalI));
         }

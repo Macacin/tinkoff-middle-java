@@ -3,10 +3,9 @@ package first_task.first_exercise;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class CompetitionTest {
     @Test
@@ -15,7 +14,7 @@ public class CompetitionTest {
         List<String> emptyList = new ArrayList<>();
 
         // act & assert
-        assertThrows(NoSuchElementException.class, () -> Competition.findWinner(emptyList));
+        assertNull(Competition.findWinner(emptyList));
     }
 
     @Test

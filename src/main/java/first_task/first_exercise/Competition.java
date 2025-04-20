@@ -1,5 +1,4 @@
 package first_task.first_exercise;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,26 +10,32 @@ public class Competition {
             return competitors.get(0);
         }
 
-        Map<String, Integer> totalScores = new HashMap<>();
+        Map<String, Integer> playerScores = new HashMap<>();
+
+        int maxScore = Integer.MIN_VALUE;
+        String currentWinner = null;
+        int step = 0;
+        int winnerStep = 0;
+
         for (String competitor : competitors) {
             String name = parseName(competitor);
-            Integer score = parseScore(competitor);
-            totalScores.merge(name, score, Integer::sum);
-        }
+            int score = parseScore(competitor);
 
-        int maxScore = Collections.max(totalScores.values());
+            int current = playerScores.merge(name, score, Integer::sum);
 
-        Map<String, Integer> currentScores = new HashMap<>();
-        for (String competitor : competitors) {
-            String name = parseName(competitor);
-            Integer score = parseScore(competitor);
-            currentScores.merge(name, score, Integer::sum);
-
-            if ((totalScores.get(name) == maxScore) && (currentScores.get(name) == maxScore)) {
-                return name;
+            if (current > maxScore) {
+                maxScore = current;
+                currentWinner = name;
+                winnerStep = step;
+            } else if (current == maxScore && step < winnerStep) {
+                currentWinner = name;
+                winnerStep = step;
             }
+
+            step++;
         }
-        return "";
+
+        return currentWinner;
     }
 
     private static String parseName(String competitor) {

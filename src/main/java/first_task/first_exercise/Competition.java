@@ -11,23 +11,22 @@ public class Competition {
             return competitors.get(0);
         }
 
-        Map<String, Integer> scores = new HashMap<>();
+        Map<String, Integer> totalScores = new HashMap<>();
         for (String competitor : competitors) {
             String name = parseName(competitor);
             Integer score = parseScore(competitor);
-            scores.put(name, scores.getOrDefault(name, 0) + score);
+            totalScores.merge(name, score, Integer::sum);
         }
 
-        int maxScore = Collections.max(scores.values());
+        int maxScore = Collections.max(totalScores.values());
 
-        Map<String, Integer> winnerScores = new HashMap<>();
+        Map<String, Integer> currentScores = new HashMap<>();
         for (String competitor : competitors) {
             String name = parseName(competitor);
             Integer score = parseScore(competitor);
-            int cumScore = winnerScores.getOrDefault(name, 0) + score;
-            winnerScores.put(name, cumScore);
+            currentScores.merge(name, score, Integer::sum);
 
-            if ((scores.get(name) == maxScore) && (cumScore == maxScore)) {
+            if ((totalScores.get(name) == maxScore) && (currentScores.get(name) == maxScore)) {
                 return name;
             }
         }

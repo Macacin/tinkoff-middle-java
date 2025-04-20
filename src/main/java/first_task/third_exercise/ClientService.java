@@ -45,8 +45,11 @@ public class ClientService {
 
     public static String getAllPhones(List<Client> clients) {
         return clients.stream()
-                .flatMap(client -> client.getPhones().stream())
+                .map(Client::getPhones)
+                .filter(phones -> phones != null && !phones.isEmpty())
+                .flatMap(List::stream)
                 .map(Phone::getNumber)
+                .filter(number -> number != null && !number.isBlank())
                 .collect(Collectors.joining(", "));
     }
 

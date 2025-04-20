@@ -12,11 +12,11 @@ public class TopPosts {
                 Comparator.comparingInt(Post::getLikesCount));
 
         for (Post post : posts) {
-            if (minHeap.size() < 10) {
+            if (minHeap.size() < 10 || post.getLikesCount() > minHeap.peek().getLikesCount()) {
                 minHeap.offer(post);
-            } else if (post.getLikesCount() > minHeap.peek().getLikesCount()) {
-                minHeap.poll();
-                minHeap.offer(post);
+                if (minHeap.size() > 10) {
+                    minHeap.poll();
+                }
             }
         }
 
